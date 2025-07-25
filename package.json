@@ -1,5 +1,5 @@
 {
-  "name": "@nick/ts-xml",
+  "name": "typescript-xml",
   "version": "1.0.0",
   "description": "A TypeScript XML parser library",
   "main": "dist/index.js",

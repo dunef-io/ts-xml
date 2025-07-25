@@ -1,11 +1,11 @@
-# ts-xml
+# typescript-xml
 
-[![NPM Version](https://img.shields.io/npm/v/ts-xml.svg)](https://www.npmjs.com/package/ts-xml)
+[![NPM Version](https://img.shields.io/npm/v/typescript-xml.svg)](https://www.npmjs.com/package/typescript-xml)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/renggli/dart-xml/dart.yml?branch=main&label=build)](https://github.com/renggli/dart-xml/actions/workflows/dart.yml)
 [![Code Coverage](https://img.shields.io/codecov/c/github/renggli/dart-xml.svg)](https://codecov.io/gh/renggli/dart-xml)
-[![License](https://img.shields.io/npm/l/ts-xml.svg)](./LICENSE)
+[![License](https://img.shields.io/npm/l/typescript-xml.svg)](./LICENSE)
 
-`ts-xml` is a lightweight and intuitive TypeScript library for parsing, traversing, querying, and building XML documents. It provides a simple DOM-like API that makes working with XML feel natural in modern TypeScript projects.
+`typescript-xml` is a lightweight and intuitive TypeScript library for parsing, traversing, querying, and building XML documents. It provides a simple DOM-like API that makes working with XML feel natural in modern TypeScript projects.
 
 This library is a port of the excellent and widely-used [dart-xml](https://github.com/renggli/dart-xml) package, bringing its robust design and developer-friendly API to the TypeScript ecosystem.
 
@@ -24,13 +24,13 @@ Install the package using your favorite package manager:
 
 ```bash
 # With npm
-npm install @nick/ts-xml
+npm install typescript-xml
 
 # With yarn
-yarn add @nick/ts-xml
+yarn add typescript-xml
 
 # With pnpm
-pnpm add @nick/ts-xml
+pnpm add typescript-xml
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ pnpm add @nick/ts-xml
 Import the necessary classes from the library:
 
 ```typescript
-import { XmlDocument, XmlElement, XmlText } from 'ts-xml';
+import { XmlDocument, XmlElement, XmlText } from 'typescript-xml';
 ```
 
 ### Parsing a Document
@@ -174,7 +174,7 @@ console.log(bookshelfDoc.toXmlString({ pretty: true }));
 
 ## Limitations
 
-`ts-xml` is designed for simplicity and ease of use. To maintain its lightweight footprint, it does not currently support:
+`typescript-xml` is designed for simplicity and ease of use. To maintain its lightweight footprint, it does not currently support:
 -   🚫 DTD or XML Schema validation.
 -   🚫 XPath or XSLT transformations.
 -   🚫 Event-based (SAX-style) parsing for handling very large files.
