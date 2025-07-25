@@ -181,7 +181,7 @@ console.log(bookshelfDoc.toXmlString({ pretty: true }));
 
 ## Credits
 
-This library is a faithful port of the amazing `dart-xml` package, created by Lukas Renggli. A huge thank you to him for the original design and implementation.
+This library is a faithful port of the [dart-xml](https://github.com/renggli/dart-xml) package, created by Lukas Renggli. A huge thank you to him for the original design and implementation.
 
 ## License
 
