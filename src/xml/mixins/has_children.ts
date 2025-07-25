@@ -1,42 +1,42 @@
-import { XmlElement } from '../element';
-import { XmlNode } from '../node';
+import { XmlElementInterface } from '../element';
+import { XmlNodeInterface } from '../node';
 
 /**
  * Mixin for nodes with children.
  */
-export interface XmlHasChildren {
+export interface XmlHasChildrenInterface {
     /**
      * Return the direct children of this node in document order.
      */
-    readonly children: XmlNode[];
+    readonly children: XmlNodeInterface[];
 
     /**
      * Return an [Iterable] over the [XmlElement] children of this node.
      */
-    readonly childElements: XmlElement[];
+    readonly childElements: XmlElementInterface[];
 
     /**
      * Return the first child element with the given `name`.
      */
-    getElement(name: string): XmlElement | undefined;
+    getElement(name: string): XmlElementInterface | undefined;
 
     /**
      * Return the first child of this node, or `undefined` if there are no children.
      */
-    readonly firstChild: XmlNode | undefined;
+    readonly firstChild: XmlNodeInterface | undefined;
 
     /**
      * Return the first child [XmlElement], or `undefined` if there are none.
      */
-    readonly firstElementChild: XmlElement | undefined;
+    readonly firstElementChild: XmlElementInterface | undefined;
 
     /**
      * Return the last child of this node, or `undefined` if there are no children.
      */
-    readonly lastChild: XmlNode | undefined;
+    readonly lastChild: XmlNodeInterface | undefined;
 
     /**
      * Return the last child [XmlElement], or `undefined` if there are none.
      */
-    readonly lastElementChild: XmlElement | undefined;
+    readonly lastElementChild: XmlElementInterface | undefined;
 }

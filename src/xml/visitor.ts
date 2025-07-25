@@ -1,25 +1,25 @@
-import { XmlHasVisitor } from './mixins/has_visitor';
-import { XmlName } from './name';
-import { XmlAttribute } from './attribute';
-import { XmlDeclaration } from './declaration';
-import { XmlDocument } from './document';
-import { XmlElement } from './element';
-import { XmlCDATA } from './cdata';
+import { XmlHasVisitorInterface } from './mixins/has_visitor';
+import { XmlNameInterface } from './name';
+import { XmlAttributeInterface } from './attribute';
+import { XmlDeclarationInterface } from './declaration';
+import { XmlDocumentInterface } from './document';
+import { XmlElementInterface } from './element';
+import { XmlCDATAInterface } from './cdata';
 import { XmlComment } from './comment';
-import { XmlDoctype } from './doctype';
+import { XmlDoctypeInterface } from './doctype';
 import { XmlProcessing } from './processing';
 import { XmlText } from './text';
 
-export interface XmlVisitor {
-    visit(node: XmlHasVisitor): void;
-    visitName(name: XmlName): void;
-    visitAttribute(node: XmlAttribute): void;
-    visitDeclaration(node: XmlDeclaration): void;
-    visitDocument(node: XmlDocument): void;
-    visitElement(node: XmlElement): void;
-    visitCDATA(node: XmlCDATA): void;
+export interface XmlVisitorInterface {
+    visit(node: XmlHasVisitorInterface): void;
+    visitName(name: XmlNameInterface): void;
+    visitAttribute(node: XmlAttributeInterface): void;
+    visitDeclaration(node: XmlDeclarationInterface): void;
+    visitDocument(node: XmlDocumentInterface): void;
+    visitElement(node: XmlElementInterface): void;
+    visitCDATA(node: XmlCDATAInterface): void;
     visitComment(node: XmlComment): void;
-    visitDoctype(node: XmlDoctype): void;
+    visitDoctype(node: XmlDoctypeInterface): void;
     visitProcessing(node: XmlProcessing): void;
     visitText(node: XmlText): void;
 }

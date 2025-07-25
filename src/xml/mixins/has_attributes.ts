@@ -1,13 +1,13 @@
-import { XmlAttribute } from '../attribute';
+import { XmlAttributeInterface } from '../attribute';
 
 /**
  * Mixin for nodes with attributes.
  */
-export interface XmlHasAttributes {
+export interface XmlHasAttributesInterface {
     /**
      * Return the attribute nodes of this node in document order.
      */
-    readonly attributes: XmlAttribute[];
+    readonly attributes: XmlAttributeInterface[];
 
     /**
      * Return the attribute value with the given `name`.
@@ -17,7 +17,7 @@ export interface XmlHasAttributes {
     /**
      * Return the attribute node with the given `name`.
      */
-    getAttributeNode(name: string): XmlAttribute | undefined;
+    getAttributeNode(name: string): XmlAttributeInterface | undefined;
 
     /**
      * Set the attribute value with the given `name` to `value`.

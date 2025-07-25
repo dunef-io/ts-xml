@@ -1,36 +1,36 @@
-import { XmlElement } from '../../element';
-import { XmlHasChildren } from '../../mixins/has_children';
-import { XmlNode } from '../../node';
+import { XmlElementInterface } from '../../element';
+import { XmlHasChildrenInterface } from '../../mixins/has_children';
+import { XmlNodeInterface } from '../../node';
 import { XmlNodeType } from '../../node_type';
 
-export class XmlHasChildrenImpl implements XmlHasChildren {
-    children!: XmlNode[];
+export class XmlHasChildren implements XmlHasChildrenInterface {
+    children!: XmlNodeInterface[];
 
-    get childElements(): XmlElement[] {
+    get childElements(): XmlElementInterface[] {
         return this.children.filter(
-            (node): node is XmlElement => node.nodeType === XmlNodeType.ELEMENT,
+            (node): node is XmlElementInterface => node.nodeType === XmlNodeType.ELEMENT,
         );
     }
 
-    getElement(name: string): XmlElement | undefined {
+    getElement(name: string): XmlElementInterface | undefined {
         return this.childElements.find(
             (element) => element.name.qualified === name,
         );
     }
 
-    get firstChild(): XmlNode | undefined {
+    get firstChild(): XmlNodeInterface | undefined {
         return this.children[0];
     }
 
-    get firstElementChild(): XmlElement | undefined {
+    get firstElementChild(): XmlElementInterface | undefined {
         return this.childElements[0];
     }
 
-    get lastChild(): XmlNode | undefined {
+    get lastChild(): XmlNodeInterface | undefined {
         return this.children[this.children.length - 1];
     }
 
-    get lastElementChild(): XmlElement | undefined {
+    get lastElementChild(): XmlElementInterface | undefined {
         return this.childElements[this.childElements.length - 1];
     }
 }

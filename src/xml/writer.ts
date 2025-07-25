@@ -1,4 +1,4 @@
-import { XmlVisitor } from './visitor';
+import { XmlVisitorInterface } from './visitor';
 import { XmlAttribute } from './attribute';
 import { XmlCDATA } from './cdata';
 import { XmlComment } from './comment';
@@ -6,11 +6,11 @@ import { XmlDeclaration } from './declaration';
 import { XmlDoctype } from './doctype';
 import { XmlDocument } from './document';
 import { XmlElement } from './element';
-import { XmlName } from './name';
+import { XmlNameInterface } from './name';
 import { XmlProcessing } from './processing';
 import { XmlText } from './text';
-import { XmlHasAttributes } from './mixins/has_attributes';
-import { XmlHasVisitor } from './mixins/has_visitor';
+import { XmlHasAttributesInterface } from './mixins/has_attributes';
+import { XmlHasVisitorInterface } from './mixins/has_visitor';
 
 class StringBuffer {
     private _buffer: string[] = [];
@@ -22,18 +22,18 @@ class StringBuffer {
     }
 }
 
-export class XmlWriter implements XmlVisitor {
+export class XmlWriter implements XmlVisitorInterface {
     protected readonly buffer: StringBuffer;
 
     constructor() {
         this.buffer = new StringBuffer();
     }
 
-    visit(node: XmlHasVisitor): void {
+    visit(node: XmlHasVisitorInterface): void {
         node.accept(this);
     }
 
-    visitName(name: XmlName): void {
+    visitName(name: XmlNameInterface): void {
         this.buffer.write(name.qualified);
     }
 
@@ -109,14 +109,14 @@ export class XmlWriter implements XmlVisitor {
         this.buffer.write(node.value);
     }
 
-    protected writeAttributes(node: XmlHasAttributes): void {
+    protected writeAttributes(node: XmlHasAttributesInterface): void {
         if (node.attributes.length > 0) {
             this.buffer.write(' ');
             this.writeIterable(node.attributes, ' ');
         }
     }
 
-    protected writeIterable(nodes: ReadonlyArray<XmlHasVisitor>, separator?: string): void {
+    protected writeIterable(nodes: ReadonlyArray<XmlHasVisitorInterface>, separator?: string): void {
         for (let i = 0; i < nodes.length; i++) {
             if (i > 0 && separator) {
                 this.buffer.write(separator);

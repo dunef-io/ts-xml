@@ -7,19 +7,19 @@ import {
     XmlCDATAEvent,
     XmlProcessingEvent,
 } from '../../events';
-import { XmlDocument, XmlElement, XmlNode } from '../../..';
-import { XmlDocumentImpl } from '../document';
-import { XmlElementImpl } from '../element';
-import { XmlTextImpl } from '../text';
-import { XmlCommentImpl } from '../comment';
-import { XmlCDATAImpl } from '../cdata';
-import { XmlProcessingImpl } from '../processing';
-import { XmlSimpleName } from '../name';
+import { XmlDocument, XmlDocumentInterface } from '../../document';
+import { XmlElement, XmlElementInterface } from '../../element';
+import { XmlText } from '../../text';
+import { XmlComment } from '../../comment';
+import { XmlCDATA } from '../../cdata';
+import { XmlProcessing } from '../../processing';
+import { XmlSimpleName } from '../../name';
 import { XmlNodeType } from '../../node_type';
+import { XmlNodeInterface } from '@src/xml/node';
 
 export class XmlNodeDecoder {
     decode(events: XmlEvent[]): XmlDocument {
-        const document = new XmlDocumentImpl();
+        const document = new XmlDocument();
         const parentStack: (XmlElement | XmlDocument)[] = [document];
 
         for (const event of events) {
@@ -27,10 +27,10 @@ export class XmlNodeDecoder {
                 case XmlNodeType.ELEMENT:
                     const startElementEvent = event as XmlStartElementEvent;
                     if (startElementEvent.isSelfClosing !== undefined) {
-                        const element = new XmlElementImpl(
+                        const element = new XmlElement(
                             new XmlSimpleName(startElementEvent.name),
                         );
-                        (parentStack[parentStack.length - 1].children as XmlNode[]).push(
+                        (parentStack[parentStack.length - 1].children as XmlNodeInterface[]).push(
                             element,
                         );
                         if (!startElementEvent.isSelfClosing) {
@@ -42,26 +42,26 @@ export class XmlNodeDecoder {
                     break;
                 case XmlNodeType.TEXT:
                     const textEvent = event as XmlTextEvent;
-                    (parentStack[parentStack.length - 1].children as XmlNode[]).push(
-                        new XmlTextImpl(textEvent.value),
+                    (parentStack[parentStack.length - 1].children as XmlNodeInterface[]).push(
+                        new XmlText(textEvent.value),
                     );
                     break;
                 case XmlNodeType.COMMENT:
                     const commentEvent = event as XmlCommentEvent;
-                    (parentStack[parentStack.length - 1].children as XmlNode[]).push(
-                        new XmlCommentImpl(commentEvent.value),
+                    (parentStack[parentStack.length - 1].children as XmlNodeInterface[]).push(
+                        new XmlComment(commentEvent.value),
                     );
                     break;
                 case XmlNodeType.CDATA:
                     const cdataEvent = event as XmlCDATAEvent;
-                    (parentStack[parentStack.length - 1].children as XmlNode[]).push(
-                        new XmlCDATAImpl(cdataEvent.value),
+                    (parentStack[parentStack.length - 1].children as XmlNodeInterface[]).push(
+                        new XmlCDATA(cdataEvent.value),
                     );
                     break;
                 case XmlNodeType.PROCESSING:
                     const processingEvent = event as XmlProcessingEvent;
-                    (parentStack[parentStack.length - 1].children as XmlNode[]).push(
-                        new XmlProcessingImpl(
+                    (parentStack[parentStack.length - 1].children as XmlNodeInterface[]).push(
+                        new XmlProcessing(
                             processingEvent.target,
                             processingEvent.value,
                         ),

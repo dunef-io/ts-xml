@@ -1,5 +1,5 @@
-import { XmlVisitor } from '../visitor';
+import { XmlVisitorInterface } from '../visitor';
 
-export interface XmlHasVisitor {
-    accept(visitor: XmlVisitor): void;
+export interface XmlHasVisitorInterface {
+    accept(visitor: XmlVisitorInterface): void;
 }

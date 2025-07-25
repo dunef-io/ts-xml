@@ -30,13 +30,12 @@ describe('XmlTokenizer', () => {
     });
 });
 
-import { XmlDocumentImpl } from './internal/document';
-import { assertDocumentParseInvariants } from './utils/assertions';
+import { XmlDocument } from './document';
 
 describe('XmlDocument.parse', () => {
     it('should parse a simple document', () => {
-        const document = XmlDocumentImpl.parse('<data>Hello</data>');
-        expect(document).toBeInstanceOf(XmlDocumentImpl);
+        const document = XmlDocument.parse('<data>Hello</data>');
+        expect(document).toBeInstanceOf(XmlDocument);
         expect(document.rootElement).toBeDefined();
         expect(document.rootElement.name.local).toBe('data');
         expect(document.rootElement.children[0].nodeType).toBe(8); // TEXT
@@ -44,13 +43,13 @@ describe('XmlDocument.parse', () => {
     });
 
     it('should parse a document with a comment', () => {
-        const document = XmlDocumentImpl.parse('<data><!-- comment --></data>');
+        const document = XmlDocument.parse('<data><!-- comment --></data>');
         expect(document.rootElement.children[0].nodeType).toBe(2); // COMMENT
         expect((document.rootElement.children[0] as any).value).toBe(' comment ');
     });
 
     it('should parse a document with a CDATA section', () => {
-        const document = XmlDocumentImpl.parse(
+        const document = XmlDocument.parse(
             '<data><![CDATA[cdata]]></data>',
         );
         expect(document.rootElement.children[0].nodeType).toBe(1); // CDATA
@@ -58,7 +57,7 @@ describe('XmlDocument.parse', () => {
     });
 
     it('should parse a document with a processing instruction', () => {
-        const document = XmlDocumentImpl.parse(
+        const document = XmlDocument.parse(
             '<data><?pi target?></data>',
         );
         expect(document.rootElement.children[0].nodeType).toBe(
