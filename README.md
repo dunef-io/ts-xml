@@ -24,13 +24,13 @@ Install the package using your favorite package manager:
 
 ```bash
 # With npm
-npm install ts-xml
+npm install @nick/ts-xml
 
 # With yarn
-yarn add ts-xml
+yarn add @nick/ts-xml
 
 # With pnpm
-pnpm add ts-xml
+pnpm add @nick/ts-xml
 ```
 
 ## Usage
