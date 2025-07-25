@@ -1,7 +1,7 @@
 {
   "name": "ts-xml",
   "version": "1.0.0",
-  "description": "",
+  "description": "A TypeScript XML parser library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -15,14 +15,15 @@
     "build": "tsc",
     "test": "jest",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint \"src/**/*.ts\" --fix"
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "xml",
     "parser",
     "typescript"
   ],
-  "author": "",
+  "author": "Nick Westendorf <nick@dunef.io>",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^30.0.0",
