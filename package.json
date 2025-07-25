@@ -1,6 +1,6 @@
 {
   "name": "typescript-xml",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A TypeScript XML parser library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
