@@ -103,13 +103,15 @@ export class PrettyXmlWriter extends XmlWriter {
         for (const node of nodes) {
             if (node.nodeType === XmlNodeType.TEXT) {
                 const textNode = node as XmlTextInterface;
-                const text = textNode.value;
-                if (text.length > 0) {
+                const originalValue = textNode.value;
+                const normalizedText = originalValue.trim().replace(whitespaceOrLineTerminators, ' ');
+
+                if (normalizedText.length > 0) {
                     const lastNode = result.length > 0 ? result[result.length - 1] : undefined;
                     if (lastNode?.nodeType === XmlNodeType.TEXT) {
-                        (lastNode as XmlTextInterface).value += text;
+                        (lastNode as XmlTextInterface).value += normalizedText;
                     } else {
-                        result.push(new XmlText(text));
+                        result.push(new XmlText(normalizedText));
                     }
                 }
             } else {
@@ -119,3 +121,5 @@ export class PrettyXmlWriter extends XmlWriter {
         return result;
     }
 }
+
+const whitespaceOrLineTerminators = /\s+/g;
