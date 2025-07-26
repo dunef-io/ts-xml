@@ -1,4 +1,4 @@
-import { XmlTokenizer } from './internal/parser/tokenizer';
+import { XmlTokenizer } from './parser/tokenizer';
 import { XmlNodeType } from './node_type';
 
 describe('XmlTokenizer', () => {

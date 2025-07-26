@@ -1,20 +1,9 @@
-import { XmlNode, XmlNodeInterface } from './node';
-import { XmlVisitorInterface } from './visitor';
+import { XmlDataInterface, XmlNodeInterface } from './interfaces';
+import { XmlNode } from './node';
+import { XmlVisitorInterface } from './interfaces/visitor';
 
-/**
- * Abstract XML data node.
- */
-export interface XmlDataInterface extends XmlNodeInterface {
-    /**
-     * The textual value of this node.
-     */
-    value: string;
-}
-
-export abstract class XmlData extends XmlNode implements XmlDataInterface {
-    constructor(public value: string) {
-        super();
-    }
+export abstract class XmlData implements XmlDataInterface {
+    constructor(public value: string) { };
 
     abstract accept(visitor: XmlVisitorInterface): void;
 }

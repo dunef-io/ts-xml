@@ -1,30 +1,10 @@
+import { XmlNodeInterface, XmlVisitorInterface } from '@src/xml/interfaces';
 import { XmlNodeType } from './node_type';
-
-import { XmlHasVisitorInterface } from './mixins/has_visitor';
-import { XmlHasWriterInterface } from './mixins/has_writer';
-import { XmlVisitorInterface } from './visitor';
-import { PrettyXmlWriter } from './pretty_writer';
+import { getDescendants } from './utils/descendants';
 import { XmlWriter } from './writer';
-
-/**
- * Abstract XML node.
- */
-export interface XmlNodeInterface extends XmlHasVisitorInterface, XmlHasWriterInterface {
-  /**
-   * Return the node type of this node.
-     */
-  readonly nodeType: XmlNodeType;
-
-  /**
-   * Return the parent node of this node, or `undefined` if there is none.
-   */
-  readonly parentNode: XmlNodeInterface | undefined;
-
-  /**
-   * Return a copy of this node and all its children.
-   */
-  copy(): XmlNodeInterface;
-}
+import { PrettyXmlWriter } from './pretty_writer';
+import { StringBuffer } from './utils';
+import { defaultEntityMapping } from './entities';
 
 export abstract class XmlNode implements XmlNodeInterface {
   abstract readonly nodeType: XmlNodeType;
@@ -42,20 +22,20 @@ export abstract class XmlNode implements XmlNodeInterface {
 
   abstract accept(visitor: XmlVisitorInterface): void;
 
-  toXmlString(options?: { pretty?: boolean }): string {
-    const writer = options?.pretty
-      ? new (PrettyXmlWriter)()
-      : new (XmlWriter)();
+  toXmlString(options: { pretty?: boolean; indent?: string; newLine?: string, entityMapping?: any } = {}): string {
+    const buffer = new StringBuffer();
+    const writer = options.pretty
+      ? new PrettyXmlWriter(buffer, options)
+      : new XmlWriter(buffer, options.entityMapping ?? defaultEntityMapping);
     this.accept(writer);
     return writer.toString();
   }
 
   get innerText(): string {
-    const descendants = require('../utils/descendants').getDescendants(this);
     let text = '';
-    for (const node of descendants) {
-      if (node.nodeType === 8 || node.nodeType === 1) { // TEXT or CDATA
-        text += (node as any).value;
+    for (const node of getDescendants(this as unknown as XmlNodeInterface)) {
+      if (node.nodeType === XmlNodeType.TEXT || node.nodeType === XmlNodeType.CDATA) {
+        text += (node as unknown as { value: string }).value;
       }
     }
     return text;

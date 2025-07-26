@@ -1,36 +1,44 @@
-import { XmlAttribute } from './attribute';
-import { XmlHasAttributes } from './internal/mixins/has_attributes';
-import { applyMixins } from './internal/utils/apply_mixins';
-import { XmlHasAttributesInterface } from './mixins/has_attributes';
-import { XmlNode, XmlNodeInterface } from './node';
+import {
+    XmlAttributeInterface,
+    XmlDeclarationInterface,
+    XmlVisitorInterface,
+    XmlNodeInterface,
+} from './interfaces';
 import { XmlNodeType } from './node_type';
-import { XmlVisitorInterface } from './visitor';
+import { NodeManager } from './node_manager';
+import { XmlAttribute } from './attribute';
+import { XmlName } from './name';
+import { XmlAttributeType } from './attribute_type';
 
 const versionAttribute = 'version';
 const encodingAttribute = 'encoding';
 const standaloneAttribute = 'standalone';
 
-/**
- * XML document declaration.
- */
-export interface XmlDeclarationInterface extends XmlNodeInterface, XmlHasAttributesInterface {
-    readonly nodeType: XmlNodeType.DECLARATION;
-    version: string | undefined;
-    encoding: string | undefined;
-    standalone: boolean | undefined;
+class XmlDeclaration implements XmlDeclarationInterface {
+    private readonly _nodeManager: NodeManager;
 
-    copy(): XmlDeclarationInterface;
-}
-
-class XmlDeclaration extends XmlNode {
-    constructor(public attributes: XmlAttribute[] = []) {
-        super();
+    constructor(public attributes: XmlAttributeInterface[] = []) {
+        this._nodeManager = new NodeManager(XmlNodeType.DECLARATION);
     }
 
-    readonly nodeType: XmlNodeType.DECLARATION = XmlNodeType.DECLARATION;
+    get nodeType(): XmlNodeType.DECLARATION {
+        return XmlNodeType.DECLARATION;
+    }
+
+    get parentNode(): XmlNodeInterface | undefined {
+        return this._nodeManager.parentNode;
+    }
+
+    set parentNode(parentNode: XmlNodeInterface | undefined) {
+        this._nodeManager.parentNode = parentNode;
+    }
+
+    get innerText(): string {
+        return this._nodeManager.getInnerText(this);
+    }
 
     get version(): string | undefined {
-        return this.getAttribute(versionAttribute);
+        return this.getAttribute(versionAttribute) ?? undefined;
     }
 
     set version(value: string | undefined) {
@@ -38,7 +46,7 @@ class XmlDeclaration extends XmlNode {
     }
 
     get encoding(): string | undefined {
-        return this.getAttribute(encodingAttribute);
+        return this.getAttribute(encodingAttribute) ?? undefined;
     }
 
     set encoding(value: string | undefined) {
@@ -54,18 +62,41 @@ class XmlDeclaration extends XmlNode {
         this.setAttribute(standaloneAttribute, value ? 'yes' : 'no');
     }
 
-    copy(): XmlDeclaration {
+    getAttribute(name: string): string | null {
+        const attribute = this.getAttributeNode(name);
+        return attribute ? attribute.value : null;
+    }
+
+    getAttributeNode(name: string): XmlAttributeInterface | null {
+        return this.attributes.find((attribute) => attribute.name.is(name)) ?? null;
+    }
+
+    setAttribute(name: string, value: string): void {
+        const attribute = this.getAttributeNode(name);
+        if (attribute) {
+            attribute.value = value;
+        } else {
+            this.attributes.push(new XmlAttribute(XmlName.fromString(name), value, XmlAttributeType.SINGLE_QUOTE));
+        }
+    }
+
+    removeAttribute(name: string): void {
+        this.attributes = this.attributes.filter((attribute) => !attribute.name.is(name));
+    }
+
+    copy(): XmlDeclarationInterface {
         return new XmlDeclaration(
             this.attributes.map((attribute) => attribute.copy()),
         );
+    }
+
+    toXmlString(options: { pretty?: boolean; indent?: string; newLine?: string, entityMapping?: any } = {}): string {
+        return this._nodeManager.toXmlString(this, options);
     }
 
     accept(visitor: XmlVisitorInterface): void {
         visitor.visitDeclaration(this);
     }
 }
-
-interface XmlDeclaration extends XmlHasAttributesInterface { }
-applyMixins(XmlDeclaration, [XmlHasAttributes]);
 
 export { XmlDeclaration };

@@ -1,5 +1,7 @@
-import { XmlElementInterface } from '../element';
-import { XmlNodeInterface } from '../node';
+import { XmlNodeInterface, XmlElementInterface } from '.';
+import { XmlElement } from '../element';
+import { XmlNodeType } from '../node_type';
+import { getDescendants } from '../utils/descendants';
 
 /**
  * Mixin for nodes with children.
@@ -19,6 +21,16 @@ export interface XmlHasChildrenInterface {
      * Return the first child element with the given `name`.
      */
     getElement(name: string): XmlElementInterface | undefined;
+
+    /**
+     * Return all child elements with the given `name`.
+     */
+    findElements(name: string): XmlElementInterface[];
+
+    /**
+     * Return the first child element with the given `name`.
+     */
+    findElement(name: string): XmlElementInterface | undefined;
 
     /**
      * Return the first child of this node, or `undefined` if there are no children.

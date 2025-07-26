@@ -1,37 +1,45 @@
-import { XmlNode, XmlNodeInterface } from './node';
+import {
+    DtdExternalId,
+    XmlDoctypeInterface,
+    XmlVisitorInterface,
+    XmlNodeInterface,
+} from './interfaces';
 import { XmlNodeType } from './node_type';
-import { XmlVisitorInterface } from './visitor';
+import { NodeManager } from './node_manager';
 
-/**
- * Placeholder for DTD external ID.
- */
-export interface DtdExternalId { }
+export class XmlDoctype implements XmlDoctypeInterface {
+    private readonly _nodeManager: NodeManager;
 
-/**
- * XML doctype node.
- */
-export interface XmlDoctypeInterface extends XmlNodeInterface {
-    readonly nodeType: XmlNodeType.DOCUMENT_TYPE;
-    readonly name: string;
-    readonly externalId: DtdExternalId | undefined;
-    readonly internalSubset: string | undefined;
-
-    copy(): XmlDoctypeInterface;
-}
-
-export class XmlDoctype extends XmlNode implements XmlDoctypeInterface {
     constructor(
         readonly name: string,
         readonly externalId: DtdExternalId | undefined,
         readonly internalSubset: string | undefined,
     ) {
-        super();
+        this._nodeManager = new NodeManager(XmlNodeType.DOCUMENT_TYPE);
     }
 
-    readonly nodeType: XmlNodeType.DOCUMENT_TYPE = XmlNodeType.DOCUMENT_TYPE;
+    get nodeType(): XmlNodeType.DOCUMENT_TYPE {
+        return XmlNodeType.DOCUMENT_TYPE;
+    }
 
-    copy(): XmlDoctype {
+    get parentNode(): XmlNodeInterface | undefined {
+        return this._nodeManager.parentNode;
+    }
+
+    set parentNode(parentNode: XmlNodeInterface | undefined) {
+        this._nodeManager.parentNode = parentNode;
+    }
+
+    get innerText(): string {
+        return this._nodeManager.getInnerText(this);
+    }
+
+    copy(): XmlDoctypeInterface {
         return new XmlDoctype(this.name, this.externalId, this.internalSubset);
+    }
+
+    toXmlString(options: { pretty?: boolean; indent?: string; newLine?: string, entityMapping?: any } = {}): string {
+        return this._nodeManager.toXmlString(this, options);
     }
 
     accept(visitor: XmlVisitorInterface): void {

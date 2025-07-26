@@ -1,32 +1,4 @@
-/**
- * XML entity name.
- */
-export interface XmlNameInterface {
-    /**
-     * Return the namespace prefix, or `undefined`.
-     */
-    readonly prefix: string | undefined;
-
-    /**
-     * Return the local name, excluding the namespace prefix.
-     */
-    readonly local: string;
-
-    /**
-     * Return the fully qualified name, including the namespace prefix.
-     */
-    readonly qualified: string;
-
-    /**
-     * Return the namespace URI, or `undefined`.
-     */
-    readonly namespaceUri: string | undefined;
-
-    /**
-     * Return a copy of this name.
-     */
-    copy(): XmlNameInterface;
-}
+import { XmlNameInterface, XmlHasVisitorInterface, XmlVisitorInterface } from './interfaces';
 
 /**
  * A simple XML name without a prefix.
@@ -40,8 +12,16 @@ export class XmlSimpleName implements XmlNameInterface {
     }
     readonly namespaceUri: string | undefined = undefined;
 
+    is(qualifiedName: string): boolean {
+        return this.qualified === qualifiedName;
+    }
+
     copy(): XmlNameInterface {
         return new XmlSimpleName(this.local);
+    }
+
+    accept(visitor: XmlVisitorInterface): void {
+        visitor.visitName(this);
     }
 }
 
@@ -53,7 +33,28 @@ export class XmlPrefixName implements XmlNameInterface {
 
     readonly namespaceUri: string | undefined = undefined;
 
+    is(qualifiedName: string): boolean {
+        return this.qualified === qualifiedName;
+    }
+
     copy(): XmlNameInterface {
         return new XmlPrefixName(this.prefix, this.local, this.qualified);
+    }
+
+    accept(visitor: XmlVisitorInterface): void {
+        visitor.visitName(this);
+    }
+}
+
+export class XmlName {
+    static fromString(qualified: string): XmlNameInterface {
+        const index = qualified.indexOf(':');
+        if (index > 0) {
+            const prefix = qualified.substring(0, index);
+            const local = qualified.substring(index + 1);
+            return new XmlPrefixName(prefix, local, qualified);
+        }
+
+        return new XmlSimpleName(qualified);
     }
 }

@@ -1,21 +1,40 @@
-import { XmlData } from './data';
 import { XmlNodeType } from './node_type';
-import { XmlVisitorInterface } from './visitor';
+import { XmlVisitorInterface } from './interfaces/visitor';
+import { XmlTextInterface, XmlNodeInterface } from '@src/xml/interfaces';
+import { NodeManager } from './node_manager';
+import { StringBuffer } from "@src/xml/utils";
+import { defaultEntityMapping } from "@src/xml/entities";
+import { PrettyXmlWriter, XmlWriter } from "@src/xml";
 
-/**
- * XML text node.
- */
-export interface XmlText extends XmlData {
-    readonly nodeType: XmlNodeType.TEXT;
+export class XmlText implements XmlTextInterface {
+    private readonly _nodeManager: NodeManager;
 
-    copy(): XmlText;
-}
+    constructor(public value: string) {
+        this._nodeManager = new NodeManager(XmlNodeType.TEXT);
+    }
 
-export class XmlText extends XmlData implements XmlText {
-    readonly nodeType: XmlNodeType.TEXT = XmlNodeType.TEXT;
+    get nodeType(): XmlNodeType.TEXT {
+        return XmlNodeType.TEXT;
+    }
 
-    copy(): XmlText {
+    get parentNode(): XmlNodeInterface | undefined {
+        return this._nodeManager.parentNode;
+    }
+
+    set parentNode(parentNode: XmlNodeInterface | undefined) {
+        this._nodeManager.parentNode = parentNode;
+    }
+
+    get innerText(): string {
+        return this.value;
+    }
+
+    copy(): XmlTextInterface {
         return new XmlText(this.value);
+    }
+
+    toXmlString(options: { pretty?: boolean; indent?: string; newLine?: string, entityMapping?: any } = {}): string {
+        return this._nodeManager.toXmlString(this, options);
     }
 
     accept(visitor: XmlVisitorInterface): void {

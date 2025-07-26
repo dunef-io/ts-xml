@@ -1,21 +1,37 @@
-import { XmlData } from './data';
 import { XmlNodeType } from './node_type';
-import { XmlVisitorInterface } from './visitor';
+import { XmlVisitorInterface } from './interfaces/visitor';
+import { XmlCommentInterface, XmlNodeInterface } from '@src/xml/interfaces';
+import { NodeManager } from './node_manager';
 
-/**
- * XML comment node.
- */
-export interface XmlComment extends XmlData {
-    readonly nodeType: XmlNodeType.COMMENT;
+export class XmlComment implements XmlCommentInterface {
+    private readonly _nodeManager: NodeManager;
 
-    copy(): XmlComment;
-}
+    constructor(public value: string) {
+        this._nodeManager = new NodeManager(XmlNodeType.COMMENT);
+    }
 
-export class XmlComment extends XmlData implements XmlComment {
-    readonly nodeType: XmlNodeType.COMMENT = XmlNodeType.COMMENT;
+    get nodeType(): XmlNodeType.COMMENT {
+        return XmlNodeType.COMMENT;
+    }
 
-    copy(): XmlComment {
+    get parentNode(): XmlNodeInterface | undefined {
+        return this._nodeManager.parentNode;
+    }
+
+    set parentNode(parentNode: XmlNodeInterface | undefined) {
+        this._nodeManager.parentNode = parentNode;
+    }
+
+    get innerText(): string {
+        return this.value;
+    }
+
+    copy(): XmlCommentInterface {
         return new XmlComment(this.value);
+    }
+
+    toXmlString(options: { pretty?: boolean; indent?: string; newLine?: string, entityMapping?: any } = {}): string {
+        return this._nodeManager.toXmlString(this, options);
     }
 
     accept(visitor: XmlVisitorInterface): void {
