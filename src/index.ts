@@ -6,7 +6,6 @@ export * from './xml/document';
 export * from './xml/doctype';
 export * from './xml/element';
 export * from './xml/name';
-export * from './xml/node';
 export * from './xml/pretty_writer';
 export * from './xml/processing';
 export * from './xml/text';
