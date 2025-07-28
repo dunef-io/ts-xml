@@ -1,22 +1,19 @@
 # typescript-xml
 
 [![NPM Version](https://img.shields.io/npm/v/typescript-xml.svg)](https://www.npmjs.com/package/typescript-xml)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/renggli/dart-xml/dart.yml?branch=main&label=build)](https://github.com/renggli/dart-xml/actions/workflows/dart.yml)
-[![Code Coverage](https://img.shields.io/codecov/c/github/renggli/dart-xml.svg)](https://codecov.io/gh/renggli/dart-xml)
 [![License](https://img.shields.io/npm/l/typescript-xml.svg)](./LICENSE)
 
 `typescript-xml` is a lightweight and intuitive TypeScript library for parsing, traversing, querying, and building XML documents. It provides a simple DOM-like API that makes working with XML feel natural in modern TypeScript projects.
 
-This library is a port of the excellent and widely-used [dart-xml](https://github.com/renggli/dart-xml) package, bringing its robust design and developer-friendly API to the TypeScript ecosystem.
-
 ## Features
 
-- ☑️ **Parse Well-Formed XML:** Reliably parse any standard-compliant XML string into a navigable tree structure.
-- ☑️ **Traverse the Tree:** Easily navigate the XML hierarchy with powerful properties like `parentElement`, `children`, and `attributes`.
-- ☑️ **Query Elements:** Quickly find elements using simple methods like `getElement(name)`, `findElements(name)`, and `findAllElements(name)`.
-- ☑️ **Manipulate the DOM:** Full support for adding, removing, and replacing nodes to dynamically modify the XML structure.
-- ☑️ **Serialize to String:** Convert your XML document back to a string, with options for pretty-printing.
-- ☑️ **Full Type Support:** Includes strong TypeScript definitions for all major XML node types, including `Element`, `Text`, `Comment`, `CDATA`, `ProcessingInstruction`, and `Doctype`.
+- **Parse Well-Formed XML:** Reliably parse any standard-compliant XML string into a navigable tree structure.
+- **Traverse the Tree:** Easily navigate the XML hierarchy with powerful properties like `parentElement`, `children`, and `attributes`.
+- **Query Elements:** Quickly find elements using simple methods like `getElement(name)`, `findElements(name)`, and `findAllElements(name)`.
+- **Manipulate the DOM:** Full support for adding, removing, and replacing nodes to dynamically modify the XML structure.
+- **Serialize to String:** Convert your XML document back to a string, with options for pretty-printing.
+- **Build Documents Programmatically:** Use a fluent builder API to construct complex XML structures from scratch.
+- **Full Type Support:** Includes strong TypeScript definitions for all major XML node types, including `Element`, `Text`, `Comment`, `CDATA`, `ProcessingInstruction`, and `Doctype`.
 
 ## Installation
 
@@ -26,19 +23,8 @@ Install the package using your favorite package manager:
 # With npm
 npm install typescript-xml
 
-# With yarn
-yarn add typescript-xml
-
 # With pnpm
 pnpm add typescript-xml
-```
-
-## Usage
-
-Import the necessary classes from the library:
-
-```typescript
-import { XmlDocument, XmlElement, XmlText } from 'typescript-xml';
 ```
 
 ### Parsing a Document
@@ -170,6 +156,51 @@ bookshelfRoot.children.push(newBook);
 
 console.log('\n--- Updated Bookshelf ---');
 console.log(bookshelfDoc.toXmlString({ pretty: true }));
+```
+
+### Building XML
+
+For more complex XML creation, `XmlBuilder` offers a declarative and fluent API to construct documents programmatically. This is especially useful when building documents from data or when the structure is dynamic.
+
+```typescript
+const builder = new XmlBuilder();
+
+builder.element('items', {
+  nest: () => {
+    for (let i = 1; i <= 3; i++) {
+      builder.element('item', {
+        nest: () => {
+          builder.attribute('id', `item-${i}`);
+          builder.element('name', { nest: `Item #${i}` });
+          builder.element('price', { nest: (i * 1.5).toFixed(2) });
+        },
+      });
+    }
+  },
+});
+
+const doc = builder.buildDocument();
+
+console.log(doc.toXmlString({ pretty: true, indent: '  ' }));
+```
+
+This will produce the following output:
+
+```xml
+<items>
+  <item id="item-1">
+    <name>Item #1</name>
+    <price>1.50</price>
+  </item>
+  <item id="item-2">
+    <name>Item #2</name>
+    <price>3.00</price>
+  </item>
+  <item id="item-3">
+    <name>Item #3</name>
+    <price>4.50</price>
+  </item>
+</items>
 ```
 
 ## Limitations
