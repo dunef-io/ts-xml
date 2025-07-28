@@ -15,6 +15,7 @@ export interface XmlElementInterface extends XmlNodeInterface {
     isSelfClosing: boolean;
     attributes: XmlAttributeInterface[];
     children: XmlNodeInterface[];
+    readonly childElements: XmlElementInterface[];
 
     /**
      * Return the attribute value with the given `name`, or `null` if it does not exist
@@ -35,6 +36,14 @@ export interface XmlElementInterface extends XmlNodeInterface {
      * Remove an attribute with the given `name`.
      */
     removeAttribute(name: string): void;
+
+    getElement(name: string): XmlElementInterface | undefined;
+    findElements(name: string): XmlElementInterface[];
+    findElement(name: string): XmlElementInterface | undefined;
+    readonly firstChild: XmlNodeInterface | undefined;
+    readonly firstElementChild: XmlElementInterface | undefined;
+    readonly lastChild: XmlNodeInterface | undefined;
+    readonly lastElementChild: XmlElementInterface | undefined;
 
     copy(): XmlElementInterface;
 

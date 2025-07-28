@@ -89,7 +89,7 @@ class XmlDocument implements XmlDocumentInterface {
     findElement(name: string): XmlElementInterface | undefined {
         for (const node of getDescendants(this)) {
             if (node.nodeType === XmlNodeType.ELEMENT && (node as XmlElementInterface).name.is(name)) {
-                return node as unknown as XmlElementInterface;
+                return node as XmlElementInterface;
             }
         }
     }
