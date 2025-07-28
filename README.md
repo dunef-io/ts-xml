@@ -96,46 +96,43 @@ console.log(prettyXml);
 ```
 
 ### Event-Based (SAX-Style) Parsing
-|
 For very large XML files, loading the entire document into memory can be inefficient. `typescript-xml` provides an event-based (SAX-style) parser that emits events as it reads the XML stream. This approach is memory-efficient and ideal for processing large datasets.
-|
 Use the `XmlSaxParser` and provide callbacks for the events you want to handle:
-|
-|```typescript
-|const saxParser = new XmlSaxParser({
- onStartElement: (event) => {
-   console.log(`Start Element: ${event.name}`);
-   if (event.attributes.length > 0) {
-     const attrs = event.attributes
-       .map((attr) => `${attr.name}="${attr.value}"`)
-       .join(', ');
-     console.log(`  Attributes: ${attrs}`);
-   }
- },
- onEndElement: (event) => {
-   console.log(`End Element: ${event.name}`);
- },
- onText: (event) => {
-   const trimmedText = event.value.trim();
-   if (trimmedText) {
-     console.log(`Text: "${trimmedText}"`);
-   }
- },
-|});
-|
-|const xmlStream = `
- <library>
-   <book id="bk101">
-     <author>Gambardella, Matthew</author>
-     <title>XML Developer's Guide</title>
-     <genre>Computer</genre>
-   </book>
- </library>
-|`;
-|
-|saxParser.parse(xmlStream);
-|```
-|
+```typescript
+const saxParser = new XmlSaxParser({
+  onStartElement: (event) => {
+    console.log(`Start Element: ${event.name}`);
+    if (event.attributes.length > 0) {
+      const attrs = event.attributes
+        .map((attr) => `${attr.name}="${attr.value}"`)
+        .join(', ');
+      console.log(`  Attributes: ${attrs}`);
+    }
+  },
+  onEndElement: (event) => {
+    console.log(`End Element: ${event.name}`);
+  },
+  onText: (event) => {
+    const trimmedText = event.value.trim();
+    if (trimmedText) {
+      console.log(`Text: "${trimmedText}"`);
+    }
+  },
+});
+
+const xmlStream = `
+  <library>
+    <book id="bk101">
+      <author>Gambardella, Matthew</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre>
+    </book>
+  </library>
+`;
+
+saxParser.parse(xmlStream);
+```
+
 ### Complex Example: Processing a Bookshelf
 
 Here is a more advanced example that showcases combining methods to process a collection of data.
