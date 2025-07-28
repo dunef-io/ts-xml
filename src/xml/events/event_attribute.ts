@@ -1,4 +1,4 @@
-import { XmlAttributeType } from '../attribute_type';
+import { XmlAttributeType } from '../attribute_type.js';
 
 export class XmlEventAttribute {
     constructor(

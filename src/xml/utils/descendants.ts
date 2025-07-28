@@ -1,4 +1,4 @@
-import { XmlNodeInterface, XmlHasChildrenInterface } from '@src/xml/interfaces';
+import { XmlNodeInterface, XmlHasChildrenInterface } from '../interfaces/index.js';
 
 export function* getDescendants(node: XmlNodeInterface): Iterable<XmlNodeInterface> {
     if ('children' in node) {

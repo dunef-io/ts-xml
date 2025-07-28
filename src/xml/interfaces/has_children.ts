@@ -1,7 +1,7 @@
-import { XmlNodeInterface, XmlElementInterface } from '.';
-import { XmlElement } from '../element';
-import { XmlNodeType } from '../node_type';
-import { getDescendants } from '../utils/descendants';
+import { XmlNodeInterface, XmlElementInterface } from './index.js';
+import { XmlElement } from '../element.js';
+import { XmlNodeType } from '../node_type.js';
+import { getDescendants } from '../utils/descendants.js';
 
 /**
  * Mixin for nodes with children.

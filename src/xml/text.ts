@@ -1,10 +1,10 @@
-import { XmlNodeType } from './node_type';
-import { XmlVisitorInterface } from './interfaces/visitor';
-import { XmlTextInterface, XmlNodeInterface } from '@src/xml/interfaces';
-import { NodeManager } from './node_manager';
-import { StringBuffer } from "@src/xml/utils";
-import { defaultEntityMapping } from "@src/xml/entities";
-import { PrettyXmlWriter, XmlWriter } from "@src/xml";
+import { XmlNodeType } from './node_type.js';
+import { XmlVisitorInterface } from './interfaces/visitor.js';
+import { XmlTextInterface, XmlNodeInterface } from './interfaces/index.js';
+import { NodeManager } from './node_manager.js';
+import { StringBuffer } from "./utils/index.js";
+import { defaultEntityMapping } from "./entities/index.js";
+import { PrettyXmlWriter, XmlWriter } from "./index.js";
 
 export class XmlText implements XmlTextInterface {
     private readonly _nodeManager: NodeManager;

@@ -4,16 +4,20 @@
   "description": "A TypeScript XML parser library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist"
   ],
   "exports": {
-    "import": "./dist/index.mjs",
+    "import": "./dist/esm/index.js",
     "require": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
-    "test": "jest",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc && tsc-alias",
+    "build:esm": "tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:package": "npm run build && npm pack && mkdir -p ../temp-test-dir && mv *.tgz ../temp-test-dir && (cd ../temp-test-dir && npm i typescript-xml-*.tgz) && node test/test.mjs && rm -rf ../temp-test-dir",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "prepublishOnly": "npm run build"
@@ -26,6 +30,7 @@
   "author": "Nick Westendorf <nick@dunef.io>",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-typescript": "^7.27.1",
     "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
@@ -33,6 +38,7 @@
     "jest": "^29.7.0",
     "prettier": "^3.6.2",
     "ts-jest": "^29.4.0",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.8.3"
   }
 }

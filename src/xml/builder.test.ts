@@ -1,8 +1,8 @@
-import { XmlBuilder } from './builder';
-import { XmlDocument } from './document';
-import { XmlElement } from './element';
-import { XmlProcessing } from './processing';
-import { XmlText } from './text';
+import { XmlBuilder } from './builder.js';
+import { XmlDocument } from './document.js';
+import { XmlElement } from './element.js';
+import { XmlProcessing } from './processing.js';
+import { XmlText } from './text.js';
 
 describe('XmlBuilder', () => {
     it('should build a simple document', () => {

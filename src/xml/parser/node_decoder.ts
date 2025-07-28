@@ -6,18 +6,16 @@ import {
     XmlCommentEvent,
     XmlCDATAEvent,
     XmlProcessingEvent,
-} from '../events';
-import {
-    XmlDocumentInterface, XmlElementInterface, XmlNodeInterface,
-} from '@src/xml/interfaces';
-import { XmlDocument } from '../document';
-import { XmlElement } from '../element';
-import { XmlText } from '../text';
-import { XmlComment } from '../comment';
-import { XmlCDATA } from '../cdata';
-import { XmlProcessing } from '../processing';
-import { XmlSimpleName } from '../name';
-import { XmlNodeType } from '../node_type';
+} from '../events/index.js';
+import { XmlNodeInterface } from '../interfaces/index.js';
+import { XmlDocument } from '../document.js';
+import { XmlElement } from '../element.js';
+import { XmlText } from '../text.js';
+import { XmlComment } from '../comment.js';
+import { XmlCDATA } from '../cdata.js';
+import { XmlProcessing } from '../processing.js';
+import { XmlSimpleName } from '../name.js';
+import { XmlNodeType } from '../node_type.js';
 
 export class XmlNodeDecoder {
     decode(events: XmlEvent[]): XmlDocument {

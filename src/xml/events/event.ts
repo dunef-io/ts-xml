@@ -1,4 +1,4 @@
-import { XmlNodeType } from '../node_type';
+import { XmlNodeType } from '../node_type.js';
 
 /**
  * Abstract event that happens during parsing.

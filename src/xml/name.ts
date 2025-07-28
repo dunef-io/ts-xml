@@ -1,4 +1,4 @@
-import { XmlNameInterface, XmlHasVisitorInterface, XmlVisitorInterface } from './interfaces';
+import { XmlNameInterface, XmlHasVisitorInterface, XmlVisitorInterface } from './interfaces/index.js';
 
 /**
  * A simple XML name without a prefix.

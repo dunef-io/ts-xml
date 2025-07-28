@@ -1,5 +1,5 @@
-import { XmlTokenizer } from './parser/tokenizer';
-import { XmlNodeType } from './node_type';
+import { XmlTokenizer } from './parser/tokenizer.js';
+import { XmlNodeType } from './node_type.js';
 
 describe('XmlTokenizer', () => {
     it('should tokenize a simple element', () => {

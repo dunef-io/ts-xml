@@ -1,5 +1,5 @@
-import { XmlNodeInterface, XmlHasAttributesInterface } from ".";
-import { XmlNodeType } from "../node_type";
+import { XmlNodeInterface, XmlHasAttributesInterface } from "./index.js";
+import { XmlNodeType } from "../node_type.js";
 
 /**
  * XML document declaration.

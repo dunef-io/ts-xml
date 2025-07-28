@@ -1,6 +1,6 @@
-import { XmlNameInterface, XmlNodeInterface, XmlVisitorInterface } from ".";
-import { XmlAttributeType } from "../attribute_type";
-import { XmlNodeType } from "../node_type";
+import { XmlNameInterface, XmlNodeInterface, XmlVisitorInterface } from "./index.js";
+import { XmlAttributeType } from "../attribute_type.js";
+import { XmlNodeType } from "../node_type.js";
 
 /**
  * XML attribute node.

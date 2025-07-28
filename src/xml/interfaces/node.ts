@@ -1,5 +1,5 @@
-import { XmlNodeType } from "../node_type";
-import { XmlVisitorInterface } from "./visitor";
+import { XmlNodeType } from "../node_type.js";
+import { XmlVisitorInterface } from "./visitor.js";
 
 /**
  * Abstract XML node.

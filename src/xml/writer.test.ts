@@ -1,4 +1,4 @@
-import { XmlDocument } from './document';
+import { XmlDocument } from './document.js';
 
 describe('XmlWriter', () => {
     it('should write a document to string', () => {

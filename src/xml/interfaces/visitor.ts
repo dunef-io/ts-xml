@@ -1,18 +1,18 @@
-import { XmlProcessingInterface } from "./processing";
+import { XmlProcessingInterface } from "./processing.js";
 import {
-    XmlAttributeInterface, XmlDeclarationInterface, XmlDocumentInterface, XmlCDATAInterface, XmlElementInterface,
+    XmlAttributeInterface, XmlDeclarationInterface, XmlCDATAInterface, XmlElementInterface,
     XmlNameInterface, XmlDoctypeInterface,
-} from '.';
-import { XmlComment } from '@src/xml/comment';
-import { XmlText } from '@src/xml/text';
-import { XmlElement } from '../element';
-import { XmlTextInterface } from './text';
+} from './index.js';
+import { XmlComment } from '../comment.js';
+import { XmlElement } from '../element.js';
+import { XmlTextInterface } from './text.js';
+import { XmlDocument } from "../document.js";
 
 export interface XmlVisitorInterface {
     visitName(name: XmlNameInterface): void;
     visitAttribute(node: XmlAttributeInterface): void;
     visitDeclaration(node: XmlDeclarationInterface): void;
-    visitDocument(node: XmlDocumentInterface): void;
+    visitDocument(node: XmlDocument): void;
     visitElement(node: XmlElement): void;
     visitCDATA(node: XmlCDATAInterface): void;
     visitComment(node: XmlComment): void;

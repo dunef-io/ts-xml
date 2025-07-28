@@ -3,12 +3,12 @@ import {
     XmlDeclarationInterface,
     XmlVisitorInterface,
     XmlNodeInterface,
-} from './interfaces';
-import { XmlNodeType } from './node_type';
-import { NodeManager } from './node_manager';
-import { XmlAttribute } from './attribute';
-import { XmlName } from './name';
-import { XmlAttributeType } from './attribute_type';
+} from './interfaces/index.js';
+import { XmlNodeType } from './node_type.js';
+import { NodeManager } from './node_manager.js';
+import { XmlAttribute } from './attribute.js';
+import { XmlName } from './name.js';
+import { XmlAttributeType } from './attribute_type.js';
 
 const versionAttribute = 'version';
 const encodingAttribute = 'encoding';

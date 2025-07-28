@@ -1,12 +1,12 @@
 import {
     XmlAttributeInterface, XmlNameInterface, XmlElementInterface, XmlVisitorInterface, XmlNodeInterface,
-} from './interfaces';
-import { XmlNodeType } from './node_type';
-import { XmlAttribute } from './attribute';
-import { XmlName } from './name';
-import { XmlAttributeType } from './attribute_type';
-import { getDescendants } from './utils/descendants';
-import { NodeManager } from './node_manager';
+} from './interfaces/index.js';
+import { XmlNodeType } from './node_type.js';
+import { XmlAttribute } from './attribute.js';
+import { XmlName } from './name.js';
+import { XmlAttributeType } from './attribute_type.js';
+import { getDescendants } from './utils/descendants.js';
+import { NodeManager } from './node_manager.js';
 
 class XmlElement implements XmlElementInterface {
     private readonly _nodeManager: NodeManager;

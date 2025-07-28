@@ -1,3 +1,3 @@
-export * from './predicate';
-export * from './string_buffer';
-export * from './token';
+export * from './predicate.js';
+export * from './string_buffer.js';
+export * from './token.js';

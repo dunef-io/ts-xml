@@ -1,19 +1,19 @@
 import {
     XmlHasAttributesInterface, XmlNameInterface, XmlVisitorInterface
-} from '@src/xml/interfaces';
-import { XmlElementInterface, XmlTextInterface } from './interfaces';
-import { XmlAttribute } from './attribute';
-import { XmlCDATA } from './cdata';
-import { XmlComment } from './comment';
-import { XmlDeclaration } from './declaration';
-import { XmlDoctype } from './doctype';
-import { XmlDocument } from './document';
-import { XmlElement } from './element';
-import { XmlProcessing } from './processing';
-import { XmlText } from './text';
-import { XmlHasVisitorInterface } from './interfaces/has_visitor';
-import { XmlEntityMapping, defaultEntityMapping } from './entities';
-import { XmlToken, StringBuffer } from './utils';
+} from './interfaces/index.js';
+import { XmlElementInterface, XmlTextInterface } from './interfaces/index.js';
+import { XmlAttribute } from './attribute.js';
+import { XmlCDATA } from './cdata.js';
+import { XmlComment } from './comment.js';
+import { XmlDeclaration } from './declaration.js';
+import { XmlDoctype } from './doctype.js';
+import { XmlDocument } from './document.js';
+import { XmlElement } from './element.js';
+import { XmlProcessing } from './processing.js';
+import { XmlText } from './text.js';
+import { XmlHasVisitorInterface } from './interfaces/has_visitor.js';
+import { XmlEntityMapping, defaultEntityMapping } from './entities/index.js';
+import { XmlToken, StringBuffer } from './utils/index.js';
 
 export class XmlWriter implements XmlVisitorInterface {
     protected readonly buffer: StringBuffer;

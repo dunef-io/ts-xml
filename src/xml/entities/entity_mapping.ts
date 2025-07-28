@@ -1,5 +1,5 @@
-import { XmlAttributeType } from '../attribute_type';
-import { XmlToken } from '../utils/token';
+import { XmlAttributeType } from '../attribute_type.js';
+import { XmlToken } from '../utils/token.js';
 
 /**
  * Describes the decoding and encoding of character entities.

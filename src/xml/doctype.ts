@@ -3,9 +3,9 @@ import {
     XmlDoctypeInterface,
     XmlVisitorInterface,
     XmlNodeInterface,
-} from './interfaces';
-import { XmlNodeType } from './node_type';
-import { NodeManager } from './node_manager';
+} from './interfaces/index.js';
+import { XmlNodeType } from './node_type.js';
+import { NodeManager } from './node_manager.js';
 
 export class XmlDoctype implements XmlDoctypeInterface {
     private readonly _nodeManager: NodeManager;

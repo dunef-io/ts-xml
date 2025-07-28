@@ -3,16 +3,15 @@ import {
     XmlDoctypeInterface,
     XmlElementInterface,
     XmlNodeInterface,
-    XmlDocumentInterface,
     XmlVisitorInterface,
-} from './interfaces';
-import { XmlNodeDecoder } from './parser/node_decoder';
-import { XmlTokenizer } from './parser/tokenizer';
-import { XmlNodeType } from './node_type';
-import { NodeManager } from './node_manager';
-import { getDescendants } from './utils/descendants';
+} from './interfaces/index.js';
+import { XmlNodeDecoder } from './parser/node_decoder.js';
+import { XmlTokenizer } from './parser/tokenizer.js';
+import { XmlNodeType } from './node_type.js';
+import { NodeManager } from './node_manager.js';
+import { getDescendants } from './utils/descendants.js';
 
-class XmlDocument implements XmlDocumentInterface {
+class XmlDocument {
     private readonly _nodeManager: NodeManager;
 
     constructor(public children: XmlNodeInterface[] = []) {
@@ -116,7 +115,7 @@ class XmlDocument implements XmlDocumentInterface {
         return this.childElements[this.childElements.length - 1];
     }
 
-    copy(): XmlDocumentInterface {
+    copy(): XmlDocument {
         return new XmlDocument(this.children.map((child) => child.copy()));
     }
 

@@ -3,10 +3,10 @@ import {
     XmlNameInterface,
     XmlVisitorInterface,
     XmlNodeInterface
-} from './interfaces';
-import { XmlAttributeType } from './attribute_type';
-import { XmlNodeType } from './node_type';
-import { NodeManager } from './node_manager';
+} from './interfaces/index.js';
+import { XmlAttributeType } from './attribute_type.js';
+import { XmlNodeType } from './node_type.js';
+import { NodeManager } from './node_manager.js';
 
 export class XmlAttribute implements XmlAttributeInterface {
     private readonly _nodeManager: NodeManager;

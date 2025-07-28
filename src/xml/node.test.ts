@@ -1,9 +1,9 @@
-import { XmlElement } from './element';
-import { XmlAttribute } from './attribute';
-import { XmlText } from './text';
-import { XmlPrefixName, XmlSimpleName } from './name';
-import { XmlAttributeType } from './attribute_type';
-import { XmlNodeType } from './node_type';
+import { XmlElement } from './element.js';
+import { XmlAttribute } from './attribute.js';
+import { XmlText } from './text.js';
+import { XmlPrefixName, XmlSimpleName } from './name.js';
+import { XmlAttributeType } from './attribute_type.js';
+import { XmlNodeType } from './node_type.js';
 
 describe('XmlElement', () => {
     describe('constructor', () => {

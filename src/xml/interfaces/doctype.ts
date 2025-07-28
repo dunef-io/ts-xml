@@ -1,6 +1,6 @@
-import { XmlNodeInterface, XmlVisitorInterface } from ".";
-import { XmlNodeType } from "../node_type";
-import { DtdExternalId } from "./dtd";
+import { XmlNodeInterface, XmlVisitorInterface } from "./index.js";
+import { XmlNodeType } from "../node_type.js";
+import { DtdExternalId } from "./dtd.js";
 
 /**
  * XML doctype node.

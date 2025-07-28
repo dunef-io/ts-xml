@@ -1,5 +1,5 @@
-import { XmlNodeInterface, XmlVisitorInterface } from ".";
-import { XmlNodeType } from "../node_type";
+import { XmlNodeInterface, XmlVisitorInterface } from "./index.js";
+import { XmlNodeType } from "../node_type.js";
 
 /**
  * XML processing instruction.

@@ -3,8 +3,8 @@ import {
     XmlNameInterface,
     XmlAttributeInterface,
     XmlVisitorInterface,
-} from ".";
-import { XmlNodeType } from "../node_type";
+} from "./index.js";
+import { XmlNodeType } from "../node_type.js";
 
 /**
  * XML element node.

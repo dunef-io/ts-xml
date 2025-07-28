@@ -1,10 +1,10 @@
-import { XmlNodeInterface, XmlVisitorInterface } from '@src/xml/interfaces';
-import { XmlNodeType } from './node_type';
-import { getDescendants } from './utils/descendants';
-import { XmlWriter } from './writer';
-import { PrettyXmlWriter } from './pretty_writer';
-import { StringBuffer } from './utils';
-import { defaultEntityMapping } from './entities';
+import { XmlNodeInterface, XmlVisitorInterface } from './interfaces/index.js';
+import { XmlNodeType } from './node_type.js';
+import { getDescendants } from './utils/descendants.js';
+import { XmlWriter } from './writer.js';
+import { PrettyXmlWriter } from './pretty_writer.js';
+import { StringBuffer } from './utils/index.js';
+import { defaultEntityMapping } from './entities/index.js';
 
 export class NodeManager {
     private _parentNode: XmlNodeInterface | undefined;

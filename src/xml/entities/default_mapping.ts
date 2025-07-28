@@ -1,6 +1,6 @@
-import { XmlAttributeType } from '../attribute_type';
-import { XmlEntityMapping } from './entity_mapping';
-import { xmlEntities, htmlEntities, html5Entities } from './named_entities';
+import { XmlAttributeType } from '../attribute_type.js';
+import { XmlEntityMapping } from './entity_mapping.js';
+import { xmlEntities, htmlEntities, html5Entities } from './named_entities.js';
 
 // highly discouraged characters from https://www.w3.org/TR/xml/#charsets
 const HIGHLY_DISCOURAGED_CHAR_CLASS = /[\u0001-\u0008\u000b\u000c\u000e-\u001f\u007f-\u0084\u0086-\u009f]/g;

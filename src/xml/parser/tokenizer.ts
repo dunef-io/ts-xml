@@ -6,9 +6,9 @@ import {
     XmlCommentEvent,
     XmlCDATAEvent,
     XmlProcessingEvent,
-} from '../events';
-import { XmlEventAttribute } from '../events/event_attribute';
-import { XmlNodeType } from '../node_type';
+} from '../events/index.js';
+import { XmlEventAttribute } from '../events/event_attribute.js';
+import { XmlNodeType } from '../node_type.js';
 
 export class XmlTokenizer {
     private readonly _input: string;

@@ -1,5 +1,5 @@
-import { XmlEvent } from './event';
-import { XmlNodeType } from '../node_type';
+import { XmlEvent } from './event.js';
+import { XmlNodeType } from '../node_type.js';
 
 /**
  * Event for an XML CDATA node.

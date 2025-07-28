@@ -1,4 +1,4 @@
-import { XmlAttributeInterface } from "./attribute";
+import { XmlAttributeInterface } from "./attribute.js";
 
 export interface XmlHasAttributesInterface {
     attributes: XmlAttributeInterface[];

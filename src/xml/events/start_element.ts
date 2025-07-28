@@ -1,6 +1,6 @@
-import { XmlEvent } from './event';
-import { XmlNodeType } from '../node_type';
-import { XmlEventAttribute } from './event_attribute';
+import { XmlEvent } from './event.js';
+import { XmlNodeType } from '../node_type.js';
+import { XmlEventAttribute } from './event_attribute.js';
 
 /**
  * Event for an XML start element.

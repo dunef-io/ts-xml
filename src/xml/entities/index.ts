@@ -1,3 +1,3 @@
-export * from './default_mapping';
-export * from './entity_mapping';
-export * from './named_entities';
+export * from './default_mapping.js';
+export * from './entity_mapping.js';
+export * from './named_entities.js';

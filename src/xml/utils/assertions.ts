@@ -1,4 +1,4 @@
-import { XmlDocument } from '../document';
+import { XmlDocument } from '../document.js';
 
 export function assertDocumentParseInvariants(input: string): void {
     const document = XmlDocument.parse(input);

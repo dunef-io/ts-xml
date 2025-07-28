@@ -1,15 +1,16 @@
 {
     "compilerOptions": {
-        "target": "ES2022",
-        "module": "commonjs",
-        "declaration": true,
-        "outDir": "./dist",
+        "target": "es2020",
+        "module": "nodenext",
         "strict": true,
+        "moduleResolution": "nodenext",
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "sourceMap": true,
-        "baseUrl": "./",
+        "isolatedModules": true,
+        "declaration": true,
+        "outDir": "./dist",
+        "baseUrl": ".",
         "paths": {
             "@src/*": [
                 "src/*"
@@ -17,11 +18,11 @@
         }
     },
     "include": [
-        "src"
+        "src/**/*.ts"
     ],
     "exclude": [
         "node_modules",
         "dist",
-        "**/*.test.ts"
+        "src/**/*.test.ts"
     ]
 }

@@ -1,7 +1,7 @@
-import { XmlNodeType } from './node_type';
-import { XmlVisitorInterface } from './interfaces/visitor';
-import { XmlCDATAInterface, XmlNodeInterface } from '@src/xml/interfaces';
-import { NodeManager } from './node_manager';
+import { XmlNodeType } from './node_type.js';
+import { XmlVisitorInterface } from './interfaces/visitor.js';
+import { XmlCDATAInterface, XmlNodeInterface } from './interfaces/index.js';
+import { NodeManager } from './node_manager.js';
 
 export class XmlCDATA implements XmlCDATAInterface {
     private readonly _nodeManager: NodeManager;

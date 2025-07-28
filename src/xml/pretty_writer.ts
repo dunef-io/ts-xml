@@ -1,12 +1,12 @@
-import { XmlAttributeInterface } from '@src/xml/interfaces';
-import { XmlElementInterface, XmlDeclarationInterface } from './interfaces';
-import { XmlNodeInterface, XmlTextInterface } from './interfaces';
-import { XmlNodeType } from './node_type';
-import { XmlWriter } from './writer';
-import { XmlDocument } from './document';
-import { XmlText } from './text';
-import { StringBuffer, XmlToken } from './utils';
-import { XmlEntityMapping, defaultEntityMapping } from './entities';
+import { XmlAttributeInterface } from './interfaces/index.js';
+import { XmlElementInterface, XmlDeclarationInterface } from './interfaces/index.js';
+import { XmlNodeInterface, XmlTextInterface } from './interfaces/index.js';
+import { XmlNodeType } from './node_type.js';
+import { XmlWriter } from './writer.js';
+import { XmlDocument } from './document.js';
+import { XmlText } from './text.js';
+import { StringBuffer, XmlToken } from './utils/index.js';
+import { XmlEntityMapping, defaultEntityMapping } from './entities/index.js';
 export class PrettyXmlWriter extends XmlWriter {
     private level: number;
     private pretty: boolean;

@@ -1,4 +1,4 @@
-import { XmlVisitorInterface } from './visitor';
+import { XmlVisitorInterface } from './visitor.js';
 
 export interface XmlHasVisitorInterface {
     accept(visitor: XmlVisitorInterface): void;

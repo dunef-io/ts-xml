@@ -1,13 +1,13 @@
 import {
-    XmlNameInterface, XmlNodeInterface,
-} from '@src/xml/interfaces';
-import { XmlAttribute } from '@src/xml/attribute';
-import { XmlAttributeType } from '@src/xml/attribute_type';
-import { XmlDocument } from '@src/xml/document';
-import { XmlElement } from '@src/xml/element';
-import { XmlName, } from '@src/xml/name';
-import { XmlProcessing } from '@src/xml/processing';
-import { XmlText } from '@src/xml/text';
+    XmlNameInterface, XmlNodeInterface, XmlAttributeInterface,
+} from './interfaces/index.js';
+import { XmlAttribute } from './attribute.js';
+import { XmlAttributeType } from './attribute_type.js';
+import { XmlDocument } from './document.js';
+import { XmlElement } from './element.js';
+import { XmlName, } from './name.js';
+import { XmlProcessing } from './processing.js';
+import { XmlText } from './text.js';
 
 class NodeBuilder {
     attributes: XmlAttribute[] = [];
