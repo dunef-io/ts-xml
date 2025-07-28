@@ -6,6 +6,7 @@ import {
     XmlCommentEvent,
     XmlCDATAEvent,
     XmlProcessingEvent,
+    XmlDoctypeEvent,
 } from '../events/index.js';
 import { XmlEventAttribute } from '../events/event_attribute.js';
 import { XmlNodeType } from '../node_type.js';
@@ -34,6 +35,10 @@ export class XmlTokenizer {
                         '[CDATA['
                     ) {
                         events.push(this.parseCDATA());
+                    } else if (
+                        this._input.substring(this._index + 2, this._index + 9) === 'DOCTYPE'
+                    ) {
+                        events.push(this.parseDoctype());
                     }
                 } else if (nextChar === '?') {
                     events.push(this.parseProcessing());
@@ -94,7 +99,7 @@ export class XmlTokenizer {
         const start = this._index;
         while (
             this._index < this._input.length &&
-            !/\s|\/|>|=/.test(this._input[this._index])
+            !/\s|\/|>|=|[|]/.test(this._input[this._index])
         ) {
             this._index++;
         }
@@ -179,6 +184,41 @@ export class XmlTokenizer {
             nodeType: XmlNodeType.PROCESSING,
             target,
             value: this._input.substring(start, end),
+        };
+    }
+
+    private parseDoctype(): XmlDoctypeEvent {
+        this._index += 9; // Skip '<!DOCTYPE'
+        this.skipWhitespace();
+        const name = this.parseName();
+        this.skipWhitespace();
+        let internalSubset = '';
+        if (this._input[this._index] === '[') {
+            this._index++;
+            const subsetStart = this._index;
+            let bracketCount = 1;
+
+            while (this._index < this._input.length && bracketCount > 0) {
+                const char = this._input[this._index];
+                if (char === '[') {
+                    bracketCount++;
+                } else if (char === ']') {
+                    bracketCount--;
+                }
+                this._index++;
+            }
+            internalSubset = this._input.substring(subsetStart, this._index - 1);
+        }
+
+        this.skipWhitespace();
+        if (this._input[this._index] === '>') {
+            this._index++;
+        }
+
+        return {
+            nodeType: XmlNodeType.DOCUMENT_TYPE,
+            name,
+            internalSubset,
         };
     }
 }

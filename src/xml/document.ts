@@ -10,6 +10,10 @@ import { XmlTokenizer } from './parser/tokenizer.js';
 import { XmlNodeType } from './node_type.js';
 import { NodeManager } from './node_manager.js';
 import { getDescendants } from './utils/descendants.js';
+import { DtdValidator } from './dtd/dtd_validator.js';
+import { XmlDoctype } from './doctype.js';
+import { XsdValidator } from './xsd/xsd_validator.js';
+import { XmlElement } from './element.js';
 
 class XmlDocument {
     private readonly _nodeManager: NodeManager;
@@ -125,6 +129,17 @@ class XmlDocument {
 
     accept(visitor: XmlVisitorInterface): void {
         visitor.visitDocument(this);
+    }
+
+    validate(validator?: DtdValidator | XsdValidator): void {
+        if (validator instanceof DtdValidator) {
+            validator.validate(this);
+        } else if (validator instanceof XsdValidator) {
+            validator.validate(this.rootElement as XmlElement);
+        } else if (this.doctype) {
+            const dtdValidator = new DtdValidator(this.doctype as XmlDoctype);
+            dtdValidator.validate(this);
+        }
     }
 }
 

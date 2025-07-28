@@ -15,6 +15,8 @@
 - **Build Documents Programmatically:** Use a fluent builder API to construct complex XML structures from scratch.
 - **Full Type Support:** Includes strong TypeScript definitions for all major XML node types, including `Element`, `Text`, `Comment`, `CDATA`, `ProcessingInstruction`, and `Doctype`.
 - **Event-Based (SAX-style) Parsing:** Efficiently parse very large XML files by processing events as they occur, without loading the entire document into memory.
+- **XML Schema (XSD) Validation:** Validate XML documents against XSD schemas to ensure structural correctness and data integrity.
+- **DTD Support:** Parse and work with XML documents that include Document Type Definitions (DTDs).
 
 ## Installation
 
@@ -242,11 +244,124 @@ This will produce the following output:
 </items>
 ```
 
+## XML Validation
+
+`typescript-xml` provides validation capabilities to ensure your XML documents conform to their schemas and document type definitions.
+
+### XSD (XML Schema) Validation
+
+You can validate XML documents against XSD schemas using the `XsdValidator` class:
+
+```typescript
+import { XmlDocument, XsdValidator } from 'typescript-xml';
+
+// Your XSD schema
+const xsdSchema = `
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="bookshelf">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="book" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="title">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="lang" type="xs:string" use="required" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="price" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="price" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+`;
+
+// Your XML document
+const xmlDocument = `
+<bookshelf>
+  <book>
+    <title lang="en">The Hitchhiker's Guide to the Galaxy</title>
+    <price>12.50</price>
+  </book>
+  <price>132.00</price>
+</bookshelf>
+`;
+
+// Parse and validate
+const document = XmlDocument.parse(xmlDocument);
+const validator = new XsdValidator(xsdSchema);
+
+try {
+  validator.validate(document.rootElement);
+  console.log('✅ XML is valid according to the XSD schema');
+} catch (error) {
+  console.error('❌ Validation failed:', error.message);
+}
+```
+
+You can also use the document's built-in validation method:
+
+```typescript
+const document = XmlDocument.parse(xmlDocument);
+const validator = new XsdValidator(xsdSchema);
+
+try {
+  document.validate(validator);
+  console.log('✅ Document is valid');
+} catch (error) {
+  console.error('❌ Validation failed:', error.message);
+}
+```
+
+### DTD Validation
+
+For documents with DTDs, validation can be performed automatically if the document includes a DOCTYPE declaration:
+
+```typescript
+const xmlWithDtd = `
+<!DOCTYPE note [
+  <!ELEMENT note (to,from,heading,body)>
+  <!ELEMENT to (#PCDATA)>
+  <!ELEMENT from (#PCDATA)>
+  <!ELEMENT heading (#PCDATA)>
+  <!ELEMENT body (#PCDATA)>
+]>
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>
+`;
+
+const document = XmlDocument.parse(xmlWithDtd);
+
+try {
+  document.validate(); // Automatically uses the DTD from the document
+  console.log('✅ Document is valid according to its DTD');
+} catch (error) {
+  console.error('❌ DTD validation failed:', error.message);
+}
+```
+
 ## Limitations
 
 `typescript-xml` is designed for simplicity and ease of use. To maintain its lightweight footprint, it does not currently support:
--   🚫 DTD or XML Schema validation.
 -   🚫 XPath or XSLT transformations.
+-   ⚠️ DTD validation is partially implemented (DTDs can be parsed but validation logic is not yet complete).
+
+### Validation Support Status
+-   ✅ **XSD (XML Schema) Validation**: Fully supported with comprehensive validation of elements, attributes, sequences, choices, and occurrence constraints.
+-   ⚠️ **DTD Validation**: DTD parsing is supported, but validation logic is still in development.
 
 ## Credits
 

@@ -1,4 +1,8 @@
+import { XmlAttributeType } from '../attribute_type.js';
+
 export interface DtdExternalId {
-    readonly publicId: string | undefined;
-    readonly systemId: string | undefined;
+    publicId?: string;
+    publicIdType?: XmlAttributeType;
+    systemId: string;
+    systemIdType: XmlAttributeType;
 }

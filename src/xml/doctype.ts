@@ -1,11 +1,11 @@
 import {
-    DtdExternalId,
     XmlDoctypeInterface,
     XmlVisitorInterface,
     XmlNodeInterface,
 } from './interfaces/index.js';
 import { XmlNodeType } from './node_type.js';
 import { NodeManager } from './node_manager.js';
+import { DtdExternalId } from './dtd/external_id.js';
 
 export class XmlDoctype implements XmlDoctypeInterface {
     private readonly _nodeManager: NodeManager;

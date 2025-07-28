@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<bookshelf xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+           xs:noNamespaceSchemaLocation="books.xsd">
+    <book>
+        <title lang="en">Growing a Language</title>
+        <price>29.99</price>
+    </book>
+    <book>
+        <title lang="en">Learning XML</title>
+        <price>39.95</price>
+    </book>
+    <price>132.00</price>
+</bookshelf>
