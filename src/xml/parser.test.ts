@@ -1,3 +1,4 @@
+import { describe, it, expect } from '@jest/globals';
 import { XmlTokenizer } from './parser/tokenizer.js';
 import { XmlNodeType } from './node_type.js';
 

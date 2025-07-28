@@ -14,6 +14,7 @@
 - **Serialize to String:** Convert your XML document back to a string, with options for pretty-printing.
 - **Build Documents Programmatically:** Use a fluent builder API to construct complex XML structures from scratch.
 - **Full Type Support:** Includes strong TypeScript definitions for all major XML node types, including `Element`, `Text`, `Comment`, `CDATA`, `ProcessingInstruction`, and `Doctype`.
+- **Event-Based (SAX-style) Parsing:** Efficiently parse very large XML files by processing events as they occur, without loading the entire document into memory.
 
 ## Installation
 
@@ -94,6 +95,47 @@ const prettyXml = document.toXmlString({ pretty: true });
 console.log(prettyXml);
 ```
 
+### Event-Based (SAX-Style) Parsing
+|
+For very large XML files, loading the entire document into memory can be inefficient. `typescript-xml` provides an event-based (SAX-style) parser that emits events as it reads the XML stream. This approach is memory-efficient and ideal for processing large datasets.
+|
+Use the `XmlSaxParser` and provide callbacks for the events you want to handle:
+|
+|```typescript
+|const saxParser = new XmlSaxParser({
+ onStartElement: (event) => {
+   console.log(`Start Element: ${event.name}`);
+   if (event.attributes.length > 0) {
+     const attrs = event.attributes
+       .map((attr) => `${attr.name}="${attr.value}"`)
+       .join(', ');
+     console.log(`  Attributes: ${attrs}`);
+   }
+ },
+ onEndElement: (event) => {
+   console.log(`End Element: ${event.name}`);
+ },
+ onText: (event) => {
+   const trimmedText = event.value.trim();
+   if (trimmedText) {
+     console.log(`Text: "${trimmedText}"`);
+   }
+ },
+|});
+|
+|const xmlStream = `
+ <library>
+   <book id="bk101">
+     <author>Gambardella, Matthew</author>
+     <title>XML Developer's Guide</title>
+     <genre>Computer</genre>
+   </book>
+ </library>
+|`;
+|
+|saxParser.parse(xmlStream);
+|```
+|
 ### Complex Example: Processing a Bookshelf
 
 Here is a more advanced example that showcases combining methods to process a collection of data.
@@ -208,7 +250,6 @@ This will produce the following output:
 `typescript-xml` is designed for simplicity and ease of use. To maintain its lightweight footprint, it does not currently support:
 -   🚫 DTD or XML Schema validation.
 -   🚫 XPath or XSLT transformations.
--   🚫 Event-based (SAX-style) parsing for handling very large files.
 
 ## Credits
 

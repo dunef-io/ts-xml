@@ -8,3 +8,4 @@ export * from './event.js';
 export * from './processing.js';
 export * from './start_element.js';
 export * from './text.js';
+export * from '../parser/sax_parser.js';

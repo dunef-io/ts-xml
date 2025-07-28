@@ -1,3 +1,4 @@
+import { describe, it, expect } from '@jest/globals';
 import { XmlDocument } from './document.js';
 
 describe('XmlWriter', () => {

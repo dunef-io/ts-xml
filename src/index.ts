@@ -10,3 +10,4 @@ export * from './xml/name.js';
 export * from './xml/pretty_writer.js';
 export * from './xml/processing.js';
 export * from './xml/text.js';
+export * from './xml/parser/index.js';

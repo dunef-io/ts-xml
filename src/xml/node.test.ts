@@ -1,3 +1,4 @@
+import { describe, it, expect } from '@jest/globals';
 import { XmlElement } from './element.js';
 import { XmlAttribute } from './attribute.js';
 import { XmlText } from './text.js';
