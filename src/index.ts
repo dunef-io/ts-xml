@@ -1,4 +1,5 @@
 export * from './xml/attribute';
+export * from './xml/builder';
 export * from './xml/cdata';
 export * from './xml/comment';
 export * from './xml/declaration';
