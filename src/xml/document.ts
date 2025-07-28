@@ -77,6 +77,12 @@ class XmlDocument implements XmlDocumentInterface {
     }
 
     findElements(name: string): XmlElementInterface[] {
+        return this.childElements.filter(
+            (element) => element.name.is(name),
+        );
+    }
+
+    findAllElements(name: string): XmlElementInterface[] {
         const result: XmlElementInterface[] = [];
         for (const node of getDescendants(this)) {
             if (node.nodeType === XmlNodeType.ELEMENT && (node as XmlElementInterface).name.is(name)) {

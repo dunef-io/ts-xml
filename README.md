@@ -78,8 +78,8 @@ if (channelElement) {
 
 The library provides three methods to locate elements:
 - `getElement(name)`: Returns the *first direct child* element with the given name, or `undefined` if not found.
-- `findElements(name)`: Returns an array of *all direct child* elements with the given name.
-- `findAllElements(name)`: Returns an array of *all descendant* elements with the given name, searching recursively.
+- `findElements(name)`: Finds direct children of the current node with the provided tag name.
+- `findAllElements(name)`: Finds direct and indirect children of the current node with the provided tag name, searching recursively.
 
 ### Serializing to a String
 

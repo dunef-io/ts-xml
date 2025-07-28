@@ -19,6 +19,7 @@ export interface XmlDocumentInterface extends XmlNodeInterface {
     readonly childElements: XmlElementInterface[];
     getElement(name: string): XmlElementInterface | undefined;
     findElements(name: string): XmlElementInterface[];
+    findAllElements(name: string): XmlElementInterface[];
     findElement(name: string): XmlElementInterface | undefined;
     readonly firstChild: XmlNodeInterface | undefined;
     readonly firstElementChild: XmlElementInterface | undefined;

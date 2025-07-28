@@ -23,9 +23,14 @@ export interface XmlHasChildrenInterface {
     getElement(name: string): XmlElementInterface | undefined;
 
     /**
-     * Return all child elements with the given `name`.
+     * Return all direct child elements of the current node with the given tag `name`.
      */
     findElements(name: string): XmlElementInterface[];
+
+    /**
+     * Return all direct and indirect child elements of the current node with the given `name`.
+     */
+    findAllElements(name: string): XmlElementInterface[];
 
     /**
      * Return the first child element with the given `name`.
